@@ -1,0 +1,48 @@
+.header{
+    font-size: 24px;
+    width: 100%;
+    height: 12vh;
+    display: flex;
+    justify-content:space-between;
+    align-items: center;
+    padding-top: 2em;
+    .login{
+        margin-left: 2em;
+        cursor: pointer;
+        svg{
+            font-size: 1.2em;
+            color: black;
+        }
+    }
+    .logo{
+        cursor: pointer;
+        margin-left: 10em;
+        img{
+            width: 3em;
+            height: 1.7em;
+        }
+    }
+    .utils{
+        margin-right: 2em;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        .search{
+            border: 0.5px solid rgba($color: #000000, $alpha: 0.5);
+            padding: 0.2em;
+            margin-right: 1em;
+            display: flex;
+            align-items: center;
+            input[type='text']{
+                outline: none;
+                border: none;
+                height: 100%;
+            }
+        }
+        svg{
+            margin-right: 0.8em;
+            font-size: 1.1em;
+            cursor: pointer;
+        }
+    }
+}

@@ -1,0 +1,86 @@
+.footer{
+    font-size: 24px;
+    font-family: gotham;
+    width: 100%;
+    height: 70vh;
+    background-color: black;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    
+    .top{
+        display: flex;
+        justify-content: space-between;
+        height: 65%;
+        .info{
+            margin-left: 1.2em;
+            h4{
+                margin-bottom: 1em;
+                margin-top: 1em;
+            }
+            p{
+                font-size: 0.6em;
+                margin-bottom: 0.9em;
+            }
+        }
+        .policies{
+            h4{
+                margin-bottom: 1em;
+                margin-top: 1em;
+            }
+            p{
+                font-size: 0.6em;
+                margin-bottom: 0.9em;
+            }
+        }
+        .socials{
+            h4{
+                margin-bottom: 1em;
+                margin-top: 1em;
+            }
+            svg{
+                margin: 0 0.3em 0 0.3em;
+            }
+        }
+        .news_letter{
+            margin-right: 1.2em;
+            h4{
+                margin-bottom: 2em;
+                margin-top: 1em;
+            }
+            .form_controller{
+                width: 250px;
+                height: 40px;
+                
+                input[type='text']{
+                  width: 180px;
+                  height: 40px;
+                  outline: none;
+                }
+                button{
+                    width: 70px;
+                    height: 40px;
+                    background-color: black;
+                    color: white;
+                }
+            }
+        }
+    }
+    .bottom{
+        height: 35%;
+        font-size: 0.8em;
+        display: flex;
+        flex-direction: column;
+        gap:0.8em;
+        align-items: center;
+        justify-content: center;
+        border-top: 1px solid rgba($color: #ffffff, $alpha: 0.1);
+        div{
+            svg{
+                margin: 0 0.3em 0 0.3em;
+            }
+        }
+    }
+
+}

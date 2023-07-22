@@ -1,0 +1,75 @@
+.product_page_container{
+    width: 100%;
+    min-height: 100vh;
+    height: auto;
+    display: flex;
+    font-size: 24px;
+    .filters_container
+    {
+      width: 20%;
+      min-height: 100%;
+      border-top: 1px solid rgba($color: #000000, $alpha: 0.2);
+      border-right: 1px solid rgba($color: #000000, $alpha: 0.2);
+      border-bottom: 1px solid rgba($color: #000000, $alpha: 0.2);
+      .gender_filter{
+        border-bottom: 1px solid rgba($color: #000000, $alpha: 0.2);
+        height: auto;
+        fieldset{
+            border: none;
+            display: flex;
+            flex-direction: column;
+            align-items: start;
+            justify-content: center;
+            margin-left: 1.2em;
+            div{
+                padding: 1em;
+                font-size: 0.6em;
+                font-family: gotham;
+                input{
+                    margin-right: 0.5em;
+                }
+            }
+        }
+      }
+      .categories_filter,.price_filter,.brand_filter{
+        border-bottom: 1px solid rgba($color: #000000, $alpha: 0.2);
+        height: auto;
+        display: flex;
+        flex-direction: column;
+        align-items: start;
+        justify-content: center;
+        gap:0.5em;
+        font-family: gotham;
+        padding: 1em;
+        h4{
+            font-size: 0.5em;
+            font-weight: bolder;
+            margin-left: 1.1em;
+            margin-bottom: 1em;
+        }
+        .filter{
+            margin-left: 0.5em;
+            display: flex; 
+            align-items: center;
+            gap:0.4em;
+            .tick_box{
+                font-size: 0.7em;
+            }
+            p{
+                font-size: 0.6em;
+                color: rgba($color: #000000, $alpha: 0.6);
+            }
+        }
+      }
+    }
+    .products_container{
+        width: 80%;
+        min-height: 100%;
+        border-top: 1px solid rgba($color: #000000, $alpha: 0.2);
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-template-rows: auto;
+        align-items: center;
+        box-sizing: border-box;
+    }
+}

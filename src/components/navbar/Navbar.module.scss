@@ -1,0 +1,72 @@
+.navbar{
+    font-family: gotham;
+    font-size: 24px;
+    width: 100%;
+    height: 10vh;
+    margin-top: 1em;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    .menu_container{
+        width: 80vw;
+        height: 100%;
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+    }
+    .menu{
+        font-size: 0.7em;
+        display: flex;
+        align-items: center;
+        transition: all 0.2s ease-in;
+        color: rgba($color: #000000, $alpha: 0.7);
+    }
+    .menu:hover{
+        font-weight: bolder;
+        cursor: pointer;
+        transform: scale(1.1);
+    }
+}
+.dropdown
+    {
+        width: 100%;
+        height: 60vh;
+        position: absolute;
+        z-index: 999999;
+        font-family: gotham;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap:1%;
+        background-color: white;
+        box-shadow: inset 15px -39px 23px -48px rgba(0,0,0,0.75);
+        div{
+        width: 21%;
+        height: 100%;
+        }
+        .links{
+          display: flex;
+          flex-direction: column;
+          align-items: start;
+          justify-content: center;
+          gap:1em;
+          p{
+            color: rgba($color: #000000, $alpha: 0.7);
+            margin-left: 1.5em;
+          }
+          p:hover{
+            cursor: pointer;
+            transform: scale(1.1);
+          }
+        }
+        .image{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            img{
+                max-width: 100%;
+                max-height: 80%;
+            }
+        }
+    }

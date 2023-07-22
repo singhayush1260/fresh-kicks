@@ -1,0 +1,27 @@
+.featured_collection_container{
+    width: 98%;
+    height: 130vh;
+    font-size: 24px;
+    display: flex;
+    gap:1%;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1em;;
+    .left{
+        width: 47%;
+        height: 90%;
+        img{
+            width: 100%;
+            max-width: 100%;
+            max-height: 100%;
+        }
+    }
+    .right{
+        width: 47%;
+        height: 90%;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr 1fr;
+        
+    }
+}
