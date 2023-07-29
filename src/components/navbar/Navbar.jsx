@@ -1,11 +1,12 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import classes from "./Navbar.module.scss";
 import { RiArrowDownSLine } from "react-icons/ri";
 import NAV_IMAGE1 from '../../assets/images/products/nav1.jpg';
 import NAV_IMAGE2 from '../../assets/images/products/nike1.2.jpg';
+import { CartContext } from "../../context/cartContext";
 const Navbar = () => {
   const [showDropdown, setShowDropdown] = useState(false);
-
+  
   return (
     <>
       <div className={classes.navbar}>
@@ -19,11 +20,9 @@ const Navbar = () => {
             Footwear
           </div>
           <div className={classes.menu}>
-            <RiArrowDownSLine />
             Apparel
           </div>
           <div className={classes.menu}>
-            <RiArrowDownSLine />
             Accessories
           </div>
           <div className={classes.menu}>About</div>

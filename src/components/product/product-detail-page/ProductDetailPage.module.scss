@@ -1,0 +1,131 @@
+.page_wrapper{
+    font-size: 24px;
+    font-family: gotham;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1em;
+    margin-bottom: 2em;
+    .images{
+   width: 70%;
+   height: 100%;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   justify-content: center;
+   gap:0.5em;
+   .main_image{
+    width: 75%;
+    height: 70%;
+    img{
+        width: 100%;
+        height: 100%;
+        max-width: 100%;
+        max-height: 100%;
+    }
+   }
+   .thumbnails{
+    width: 75%;
+    height: 20%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap:1em;
+    .current_image{
+        border: 1px solid rgba($color: #000000, $alpha: 0.3);
+    }
+    img{
+        width: 25%;
+        height: 100%;
+        max-width: 100%;
+        max-height: 100%;
+    }
+    img:hover{
+        cursor: pointer;
+        opacity: 0.8;
+    }
+   }
+    }
+    .info{
+      width: 45%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: start;
+      gap:0.7em;
+      div,button{
+        margin-left: 1em;
+      }
+      .brand{
+        width: 90%;
+        margin-top: 1em;
+        display: flex;
+        justify-content: space-between;
+        p{
+            font-size: 0.8em;
+        }
+      }
+      .title_and_price{
+        width: 90%;
+        p{
+            margin-bottom: 0.4em;
+            font-size: 2em;
+        }
+      }
+      .sizes{
+        width: 90%;
+        height: 20%;
+        small{
+            font-size: 0.6em;
+            text-decoration: underline;
+        }
+        .size{
+            width: 100%;
+            height: 3em;
+            margin-left: 0;
+            display: flex;
+            align-items: center;
+            gap:0.4em;
+            div{
+                width: 2em;
+                height: 2em;
+                background-color: black;
+                color: white;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                margin-left: 0;
+                
+            }
+            div:hover{
+                cursor: pointer;
+                opacity: 0.8;
+            }
+        }
+      }
+      button {
+        background-color: black;
+        width: 51%;
+        color: white;
+        padding: 1.3em;
+        margin-top: 1em;
+        border: none;
+        outline: none;
+        cursor: pointer;
+        margin-left: 1.5em;
+        font-size: 0.7em;
+      }
+    }
+}
+.you_may_also_like{
+    font-family: gotham;
+    margin-top: 3em;
+    h1{
+        font-weight: bolder;
+        margin-left: 3.4em;
+       
+    }
+   
+}

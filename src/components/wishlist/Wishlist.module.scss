@@ -1,0 +1,29 @@
+.wishlist_wrapper
+{
+    font-size: 24px;
+    font-family: gotham;
+    width: 700px;
+    height: 400px;
+    background-color:white;
+    z-index: 9999999;
+    position: fixed;
+    top:100px;
+    left:280px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: inset 2px -1px 14px -9px rgba(0,0,0,0.75);
+    overflow-y: auto;
+    .wishlist_title{
+        width: 100%;
+        height: 20%;
+        display: flex;
+        justify-content: space-between;
+        padding: 1em;
+        h4{
+            font-size: 0.6em;
+        }
+        svg{
+            cursor: pointer;
+        }
+    }
+}

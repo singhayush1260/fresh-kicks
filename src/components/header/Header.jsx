@@ -3,7 +3,12 @@ import {LiaUserCircle,LiaHeart} from 'react-icons/lia';
 import {AiOutlineShopping} from 'react-icons/ai';
 import {CiSearch} from 'react-icons/ci';
 import { Link } from 'react-router-dom';
+import { useContext } from 'react';
+import { CartContext } from '../../context/cartContext';
+import { WishlistContext } from '../../context/wishlistContext';
 const Header=()=>{
+const {cartData, showCart, handleShowCart}=useContext(CartContext);
+const{showWishList, handleShowWishlist}=useContext(WishlistContext);
 return(
     <header className={classes.header}>
         <Link to="/login" className={classes.login} ><LiaUserCircle/> </Link>
@@ -15,10 +20,11 @@ return(
                 <CiSearch/>
                 <input type="text" placeholder='Search...' />
             </div>
-           <div className={classes.wishlist}>
+           <div className={classes.wishlist} onClick={handleShowWishlist}>
                <LiaHeart/>
            </div>
-           <div className={classes.cart}>
+           <div className={classes.cart} onClick={handleShowCart}>
+             {cartData.length >=1 && <p>{cartData.length}</p> } 
             <AiOutlineShopping/>
            </div>
         </div>

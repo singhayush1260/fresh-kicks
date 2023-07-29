@@ -4,6 +4,8 @@ import {BsSquare} from 'react-icons/bs';
 import { useState, useEffect } from 'react';
 import { dummyProducts } from '../../../productsStore';
 import CarousalCard from '../../carousal-card/CarousalCard';
+import { sanityClient } from '../../../sanity/sanity-client';
+import af1black1 from '../../../assets/images/products/af1black1.jpg'; 
 const ProductPage=()=>{
 
     const[selectedGender,setSelectedGender]=useState(null);
@@ -11,44 +13,49 @@ const ProductPage=()=>{
     const[isSelectedBrand,setSelectedBrand]=useState([false, false, false, false]);
     const[isSelectedPrice,setSelectedPrice]=useState([false, false, false, false]);
 
-    const[products,setProducts]=useState(dummyProducts);
-    const[filteredProducts, setFilteredProducts]=useState(dummyProducts);
+    const[products,setProducts]=useState(null);
+    const[filteredProducts, setFilteredProducts]=useState(null);
     const[selectedFilters,setSelectedFilters]=useState([]);
 
     const handleFilterSelection=(currentSelectedFilter)=>{
-        //console.log('currentSelectedFilter',currentSelectedFilter)
     if(selectedFilters.includes(currentSelectedFilter)){
         let sf=selectedFilters.filter((f)=>f!==currentSelectedFilter)
-        //console.log('sf',sf)
         setSelectedFilters(sf);
     }
     else{
         console.log('currentSelectedFilter',currentSelectedFilter)
         setSelectedFilters([...selectedFilters,currentSelectedFilter])
-        //console.log('selectedFilters',selectedFilters)
     }
     }
-
-   // useEffect(()=>{console.log('selectedFilters',selectedFilters)},[selectedFilters])
 
     const filterProducts=()=>{
-       console.log('selectedFilters',selectedFilters)
       if(selectedFilters.length>0){
+         //console.log(selectedFilters)
            let tempProducts=selectedFilters.map((selected_filter)=>{
-           // console.log('selected_filter',selected_filter)
             let temp=products.filter((p)=>{ return p.category===selected_filter} )
-            // console.log('temp',temp)
-           //  console.log('temp.length',temp.length)
+            //console.log(temp)
             return temp
            })
            setFilteredProducts(tempProducts.flat())
+           console.log(filteredProducts)
       }
       else{
-        console.log('lasttttt')
-          console.log('products',products)
           setFilteredProducts(products)
       }
     }   
+
+   useEffect(()=>{
+   const fetchProducts= async ()=>{
+      const products= await sanityClient.fetch('*[_type == "products"]{ title,category,brand,price,id,image}')
+      //console.log(products)
+      // const product=products.map((prod)=>{
+      //   {brand:prod.brand, title:prod.title}
+      // })
+      setProducts(products);
+      setFilteredProducts(products)
+     }
+    fetchProducts()
+   },[])
 
    useEffect(()=>{ filterProducts()  },[selectedFilters])
 
@@ -70,19 +77,19 @@ const ProductPage=()=>{
          <div className={classes.categories_filter}>
             <h4>CATEGORIES</h4>
              <div className={classes.filter}>
-               <div className={classes.tick_box} onClick={()=> {setSelectedCategory(prevState => prevState.map((item, index) => index === 0 ? !isSelectedCategory[0] : item)); handleFilterSelection("Sneakers")}}>
+               <div className={classes.tick_box} onClick={()=> {setSelectedCategory(prevState => prevState.map((item, index) => index === 0 ? !isSelectedCategory[0] : item)); handleFilterSelection("sneaker")}}>
                 {isSelectedCategory[0] ? <AiFillCheckSquare/> : <BsSquare/>}
                </div>
                <p>Sneakers</p>
              </div>
              <div className={classes.filter}>
-             <div className={classes.tick_box} onClick={()=> {setSelectedCategory(prevState => prevState.map((item, index) => index === 1 ? !isSelectedCategory[1] : item)); handleFilterSelection("Classics")}}>
+             <div className={classes.tick_box} onClick={()=> {setSelectedCategory(prevState => prevState.map((item, index) => index === 1 ? !isSelectedCategory[1] : item)); handleFilterSelection("classics")}}>
                 {isSelectedCategory[1] ? <AiFillCheckSquare/> : <BsSquare/>}
                </div>
                <p>Classics</p>
              </div>
              <div className={classes.filter}>
-             <div className={classes.tick_box} onClick={()=> {setSelectedCategory(prevState => prevState.map((item, index) => index === 2 ? !isSelectedCategory[2] : item)); handleFilterSelection("Basketball")}}>
+             <div className={classes.tick_box} onClick={()=> {setSelectedCategory(prevState => prevState.map((item, index) => index === 2 ? !isSelectedCategory[2] : item)); handleFilterSelection("basketball")}}>
                 {isSelectedCategory[2] ? <AiFillCheckSquare/> : <BsSquare/>}
                </div>
                <p>Basketball</p>
@@ -144,8 +151,8 @@ const ProductPage=()=>{
          </div>
        </div>
        <div className={classes.products_container}>
-       { filteredProducts.map((product)=>{
-           return <CarousalCard title={product.name} brand={product.brand} price={product.price} i1={product.image}/>
+       { filteredProducts && filteredProducts.map((product)=>{ console.log(product.id.current)
+           return <CarousalCard key={product.id.current} prod_id={product.id.current} title={product.title} brand={product.brand} price={product.price} i1={af1black1}/>
         })
           }
        </div>

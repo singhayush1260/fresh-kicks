@@ -25,6 +25,9 @@
       width: 55%;
       height: 4.4em;
       padding: 0.7em;
+      .input_error{
+        border: 1.5px solid red;
+      }
       label {
         font-size: 0.8em;
         margin-bottom: 0.3em;
