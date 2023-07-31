@@ -1,19 +1,52 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import classes from "./Login.module.scss";
 import { useFormik } from "formik";
 import { loginSchema } from "./login_schema";
+import axios from "axios";
+import toast, { Toaster } from 'react-hot-toast';
+import { useContext } from "react";
+import { AuthContext } from "../../context/authContext";
 
 const Login = () => {
- 
+
+  const{authData, dispatch}=useContext(AuthContext);
+  const navigate=useNavigate();
+  
+  const notify = (message) => {
+    toast.error(message);
+  }
+
   const{values, errors, touched, handleChange, handleBlur, handleSubmit}=useFormik({
       initialValues:{},
       validationSchema:loginSchema,
-      onSubmit:(values)=>{
-        console.log(values)
+      onSubmit: async (values)=>{
+        const{Email, Password}=values;
+        try{
+          const { data } = await axios.post('http://localhost:3000/api/auth/login',{Email,Password})
+          console.log(data);
+          localStorage.setItem("USER", JSON.stringify(data));
+          dispatch({type:'LOGIN', payload:data})
+          navigate('/')
+        }catch(error){
+          //alert('Invalid Credentials')
+          notify('Invalid Credentials.')
+         console.log(error)
+        }
+        
       }
   })
 
+
+
   return (
+    <>
+    <Toaster position="top-center" reverseOrder={false} gutter={8} containerClassName="" containerStyle={{}}
+     toastOptions={{
+    className: '',
+    duration: 3000,
+    style: {borderRadius: '10px',background: '#333',color: '#fff'},
+    success: {duration: 3000, theme: { primary: 'green',secondary: 'black'}}}} />
+
     <div className={classes.form_container}>
       <h1>LOGIN</h1>
       <form className={classes.form} onSubmit={handleSubmit}>
@@ -50,6 +83,7 @@ const Login = () => {
         </p>
       </form>
     </div>
+    </>
   );
 };
 export default Login;

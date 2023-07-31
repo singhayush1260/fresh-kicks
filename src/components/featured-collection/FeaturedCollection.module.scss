@@ -1,5 +1,5 @@
 .featured_collection_container{
-    width: 98%;
+    width: 100%;
     height: 130vh;
     font-size: 24px;
     display: flex;
@@ -8,20 +8,19 @@
     align-items: center;
     margin-bottom: 1em;;
     .left{
-        width: 47%;
+        width: 50%;
+    }
+    .right{
+        width: 40%;
+    }
+    .left, .right{
         height: 90%;
+        box-shadow: rgba(0, 0, 0, 0.45) 0px 25px 20px -20px;
         img{
             width: 100%;
+            height: 100%;
             max-width: 100%;
             max-height: 100%;
         }
-    }
-    .right{
-        width: 47%;
-        height: 90%;
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        grid-template-rows: 1fr 1fr;
-        
     }
 }

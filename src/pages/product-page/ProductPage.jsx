@@ -1,11 +1,10 @@
+import { useState, useEffect } from 'react';
 import classes from './ProductPage.module.scss';
 import {AiFillCheckSquare} from 'react-icons/ai';
 import {BsSquare} from 'react-icons/bs';
-import { useState, useEffect } from 'react';
-import { dummyProducts } from '../../../productsStore';
-import CarousalCard from '../../carousal-card/CarousalCard';
-import { sanityClient } from '../../../sanity/sanity-client';
-import af1black1 from '../../../assets/images/products/af1black1.jpg'; 
+import ProductCard from '../../components/product-card/ProductCard';
+import { sanityClient } from '../../sanity/sanity-client';
+import af1black1 from '../../assets/images/products/af1black1.jpg'; 
 const ProductPage=()=>{
 
     const[selectedGender,setSelectedGender]=useState(null);
@@ -152,7 +151,7 @@ const ProductPage=()=>{
        </div>
        <div className={classes.products_container}>
        { filteredProducts && filteredProducts.map((product)=>{ console.log(product.id.current)
-           return <CarousalCard key={product.id.current} prod_id={product.id.current} title={product.title} brand={product.brand} price={product.price} i1={af1black1}/>
+           return <ProductCard key={product.id.current} prod_id={product.id.current} title={product.title} brand={product.brand} price={product.price} i1={af1black1}/>
         })
           }
        </div>

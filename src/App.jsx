@@ -1,29 +1,42 @@
 import "./App.scss";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { Route, Routes, useLocation } from "react-router-dom";
+
 import Footer from "./components/footer/Footer";
-import Login from "./components/forms/login/Login";
 import Header from "./components/header/Header";
-import LandingPage from "./components/landing-page/LandingPage";
+import LandingPage from "./pages/landing-page/LandingPage";
 import Navbar from "./components/navbar/Navbar";
-import Register from "./components/forms/register/Register";
-import ProductPage from "./components/product/product-page/ProductPage";
-import ProductDetailPage from "./components/product/product-detail-page/ProductDetailPage";
 import Cart from "./components/cart/Cart";
+import Wishlist from "./components/wishlist/Wishlist";
+import Dashboard from "./components/dashboard/Dashboard";
+
+import Checkout from "./pages/checkout/Checkout";
+import PaymentSuccessful from "./pages/payment-successful/PaymentSuccessful";
+import ProductPage from "./pages/product-page/ProductPage";
+import ProductDetailPage from "./pages/product-detail-page/ProductDetailPage";
+import Login from "./pages/login/Login";
+import Register from "./pages/register/Register";
+import About from "./pages/about/About";
+
+import { AuthContext } from "./context/authContext";
 import { CartContext } from "./context/cartContext";
 import { WishlistContext } from "./context/wishlistContext";
-import Wishlist from "./components/wishlist/Wishlist";
-import Checkout from "./components/checkout/Checkout";
-import PaymentSuccessful from "./components/payment-successful/PaymentSuccessful";
+import { DashboardContext } from "./context/dashboardContext";
+
 
 
 const App = () => {
   const{showCart}=useContext(CartContext);
   const{showWishlist}=useContext(WishlistContext);
+  const{showDashboard}=useContext(DashboardContext);
+  const{authData:{user}}=useContext(AuthContext);
   const location=useLocation();
   const isCheckoutPage= location.pathname === '/checkout';
+
+
   return (
     <div>
+      {showDashboard && user && <Dashboard name={user.Name} email={user.Email}/>}
       {!isCheckoutPage && <Header />}
       {!isCheckoutPage && <Navbar />}
       {!isCheckoutPage && showCart && <Cart/>}
@@ -32,6 +45,7 @@ const App = () => {
         <Route path="/" element={<LandingPage/>} />
         <Route path="/login" element={<Login/>} />
         <Route path="/register" element={<Register/>} />
+        <Route path="/about" element={<About/> } />
         <Route path="/products" element={<ProductPage/>} />
         <Route path="/products/:prod_id" element={<ProductDetailPage/>} />
         <Route path="/checkout" element={ <Checkout/>}/>

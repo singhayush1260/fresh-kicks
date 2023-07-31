@@ -1,5 +1,5 @@
 import { useRef } from 'react';
-import CarousalCard from '../carousal-card/CarousalCard';
+import ProductCard from '../product-card/ProductCard';
 import classes from './ProductCarousal.module.scss';
 import { SlArrowLeft, SlArrowRight } from 'react-icons/sl';
 
@@ -53,7 +53,7 @@ const ProductCarousal = ({ title }) => {
         <div className={classes.card_container} ref={cardContainerRef}>
           {
             newArrivals.map((product)=>{
-                return <CarousalCard title={product.title} i1={product.i1} i2={product.i2}/>
+                return <ProductCard title={product.title} i1={product.i1} i2={product.i2}/>
             })
           }
         </div>

@@ -1,26 +1,28 @@
+import { useContext, useEffect, useState } from 'react';
 import classes from './ProductDetailPage.module.scss';
 import {LiaHeart} from 'react-icons/lia';
-import af1black1 from '../../../assets/images/products/af1black1.jpg'; 
-import af1black2 from '../../../assets/images/products/af1black2.jpg'; 
-import { useContext, useEffect, useState } from 'react';
-import ProductCarousal from '../../product-carousal/ProductCarousal';
-import { CartContext } from '../../../context/cartContext';
+import af1black1 from '../../assets/images/products/af1black1.jpg'; 
+import af1black2 from '../../assets/images/products/af1black2.jpg'; 
+import ProductCarousal from '../../components/product-carousal/ProductCarousal';
+import { CartContext } from '../../context/cartContext';
+import { WishlistContext } from '../../context/wishlistContext';
 import { useParams } from 'react-router-dom';
-import { sanityClient } from '../../../sanity/sanity-client';
+import { sanityClient } from '../../sanity/sanity-client';
 const ProductDetailPage=({product_id})=>{
     
     const{dispatch}=useContext(CartContext)
+    const{dispatch:wishlistDispatcher}=useContext(WishlistContext);
     const[product,setProduct]=useState({});
     const{prod_id}=useParams();
     //console.log(cartData)
     
     console.log('slug',prod_id)
     const dummyProduct=[{
-    id:1,
+    id:{current: 1},
     title:"Air Force 1 Black",
     brand:"Nike",
     price:"8790",
-    image:[af1black1.jpg]
+    image:[null]
     }]
 
 
@@ -29,9 +31,11 @@ const ProductDetailPage=({product_id})=>{
             const product=await sanityClient.fetch(`*[id.current == "${prod_id}"]`);
             setProduct(product[0]);
            // console.log(product)
+           //console.log('dummy product', dummyProduct[0])
         }
         fetchProduct();
         console.log(product);
+        
     },[])
 
     const[mainImage,setMainImage]=useState(af1black1);
@@ -57,7 +61,8 @@ const ProductDetailPage=({product_id})=>{
         <div className={classes.info}>
             <div className={classes.brand}>
               <p>{product.brand}</p>
-              <LiaHeart/>
+              {/* { console.log(isProductInWishlist(product))} */}
+              <LiaHeart onClick={()=>wishlistDispatcher({type:'ADD_ITEM', payload: product})}/>
             </div>
             <div className={classes.title_and_price}>
             <p> <b>{product.title}</b> </p>

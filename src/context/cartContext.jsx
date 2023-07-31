@@ -2,7 +2,7 @@ import { createContext, useReducer, useState } from "react";
 
 const CartContext = createContext();
 
-const manageCartReducer = (state, action) => {
+const cartReducer = (state, action) => {
   // console.log("state", state);
   // console.log('payload', action.payload)
   const { id } = action.payload;
@@ -57,7 +57,7 @@ const initialState = [
   },
 ];
 const CartContextProvider = ({ children }) => {
-  const [cartData, dispatch] = useReducer(manageCartReducer, initialState);
+  const [cartData, dispatch] = useReducer(cartReducer, initialState);
   const [showCart, setShowCart] = useState(false);
 
   const handleShowCart = () => {

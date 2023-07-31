@@ -1,6 +1,6 @@
-import classes from './CarousalCard.module.scss';
+import classes from './ProductCard.module.scss';
 import { Link } from 'react-router-dom';
-const CarousalCard=({prod_id,title, brand, price,i1})=>{
+const ProductCard=({prod_id,title, brand, price,i1})=>{
 return(
     <Link to={`/products/${prod_id}`} className={classes.carousal_card}>
          <div className={classes.image}>
@@ -14,4 +14,4 @@ return(
     </Link>
 )
 }
-export default CarousalCard;
+export default ProductCard;
