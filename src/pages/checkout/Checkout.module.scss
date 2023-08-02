@@ -24,6 +24,20 @@
             justify-content: start;
             align-items: center;
             overflow: auto;
+            .empty_cart{
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                width: 100%;
+                height: 100%;
+                svg{
+                    font-size: 4em;
+                }
+                small{
+                    margin: 0.4em;
+                }
+            }
             .product{
                 width: 90%;
                 height: 10%;

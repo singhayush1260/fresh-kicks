@@ -13,7 +13,7 @@ const ProductPage=()=>{
     const[isSelectedPrice,setSelectedPrice]=useState([false, false, false, false]);
 
     const[products,setProducts]=useState(null);
-    const[filteredProducts, setFilteredProducts]=useState(null);
+    const[filteredProducts, setFilteredProducts]=useState([]);
     const[selectedFilters,setSelectedFilters]=useState([]);
 
     const handleFilterSelection=(currentSelectedFilter)=>{
@@ -29,10 +29,8 @@ const ProductPage=()=>{
 
     const filterProducts=()=>{
       if(selectedFilters.length>0){
-         //console.log(selectedFilters)
            let tempProducts=selectedFilters.map((selected_filter)=>{
             let temp=products.filter((p)=>{ return p.category===selected_filter} )
-            //console.log(temp)
             return temp
            })
            setFilteredProducts(tempProducts.flat())
@@ -46,10 +44,6 @@ const ProductPage=()=>{
    useEffect(()=>{
    const fetchProducts= async ()=>{
       const products= await sanityClient.fetch('*[_type == "products"]{ title,category,brand,price,id,image}')
-      //console.log(products)
-      // const product=products.map((prod)=>{
-      //   {brand:prod.brand, title:prod.title}
-      // })
       setProducts(products);
       setFilteredProducts(products)
      }
@@ -58,10 +52,10 @@ const ProductPage=()=>{
 
    useEffect(()=>{ filterProducts()  },[selectedFilters])
 
+   const renderFilterUI=()=>{
     return(
-      <div className={classes.product_page_container}>
-       <div className={classes.filters_container}>
-         <div className={classes.gender_filter}>
+      <>
+       <div className={classes.gender_filter}>
            <fieldset id="gender" >
             <div>
             <input type="radio" value="men" name="gender" /> 
@@ -148,9 +142,18 @@ const ProductPage=()=>{
                <p>Rs.15000 to Rs.25000</p>
              </div>
          </div>
+      </>
+    )
+   }
+
+    return(
+      <div className={classes.product_page_container}>
+       <div className={classes.filters_container}>
+        {renderFilterUI()}
        </div>
        <div className={classes.products_container}>
-       { filteredProducts && filteredProducts.map((product)=>{ console.log(product.id.current)
+        { filteredProducts && filteredProducts.length < 1 && <p className={classes.no_prod_found}>No product found.</p>}
+        { filteredProducts &&  filteredProducts.length > 0 && filteredProducts.map((product)=>{ console.log(product.id.current)
            return <ProductCard key={product.id.current} prod_id={product.id.current} title={product.title} brand={product.brand} price={product.price} i1={af1black1}/>
         })
           }

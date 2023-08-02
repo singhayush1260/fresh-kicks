@@ -1,27 +1,17 @@
-import { createContext, useReducer, useState } from "react";
+import { createContext, useEffect, useReducer, useState } from "react";
 
 const CartContext = createContext();
 
 const cartReducer = (state, action) => {
-  // console.log("state", state);
-  // console.log('payload', action.payload)
   const { id } = action.payload;
-  // console.log('id',id)
-  // console.log('product.id.current ,id.current',state[0].id.current , id.current)
   let updatedCart;
   switch (action.type) {
     case "DECREMENT_ITEM":
-      console.log("dec");
       updatedCart = state.map((product) => { 
-        console.log('product.id',product.id)
-        console.log('id.current', id.current)
         return product.id.current === id.current ? { ...product, quantity: Math.max(product.quantity - 1, 0) } : product}
       );
       return updatedCart.filter((product) => product.quantity >= 1);
     case "ADD_ITEM":
-      console.log("add item");
-      //console.log(action.payload);
-      console.log('id',id)
       const existingProductIndex = state.findIndex(
         (product) => product.id === id
       );
@@ -34,12 +24,9 @@ const cartReducer = (state, action) => {
       } else {
         updatedCart = [...state, { ...action.payload, quantity: 1 }];
       }
-      console.log(updatedCart);
       return updatedCart;
     case "REMOVE_ITEM":
-      console.log("remove item", state);
       updatedCart = state.filter((product) => product.id.current !== id.current);
-      console.log("aadssfsa", updatedCart);
       return updatedCart;
     default:
       return state;
@@ -55,17 +42,39 @@ const initialState = [
     price: 4422,
     quantity: 2,
   },
+  {
+    id: {current: 2},
+    brand: "Puma",
+    title: "ff fdf ev",
+    size: 3,
+    price: 3400,
+    quantity: 3,
+  },
 ];
 const CartContextProvider = ({ children }) => {
   const [cartData, dispatch] = useReducer(cartReducer, initialState);
+  const [totalPrice, setTotalPrice]=useState(0);
   const [showCart, setShowCart] = useState(false);
 
   const handleShowCart = () => {
     setShowCart(!showCart);
   };
 
+  const calculateTotalPrice=()=>{
+   console.log(cartData);
+   const total = cartData.reduce((acc, product)=>{
+       acc = acc + ( product.price * product.quantity )
+       return acc;
+   },0)
+   setTotalPrice(total)
+  }
+
+  useEffect(()=>{
+    calculateTotalPrice();
+  },[cartData])
+
   return (
-    <CartContext.Provider value={{ handleShowCart, showCart, cartData, dispatch }}>
+    <CartContext.Provider value={{ handleShowCart, showCart, cartData, dispatch, totalPrice, calculateTotalPrice }}>
       {children}
     </CartContext.Provider>
   );
