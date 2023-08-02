@@ -1,5 +1,6 @@
 import { useContext, useState } from "react";
 import classes from "./Navbar.module.scss";
+import { Link } from "react-router-dom";
 import { RiArrowDownSLine } from "react-icons/ri";
 import NAV_IMAGE1 from '../../assets/images/products/nav1.jpg';
 import NAV_IMAGE2 from '../../assets/images/products/nike1.2.jpg';
@@ -25,7 +26,7 @@ const Navbar = () => {
           <div className={classes.menu}>
             Accessories
           </div>
-          <div className={classes.menu}>About</div>
+          <Link to="/about" className={classes.menu}>About</Link>
           <div className={classes.menu}>Contact</div>
         </div>
       </div>

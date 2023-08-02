@@ -1,4 +1,4 @@
-import { useContext } from 'react'
+import { useContext, useState } from 'react'
 import classes from './Checkout.module.scss'
 import {SiRazorpay} from 'react-icons/si'
 import {AiOutlineDelete} from 'react-icons/ai';
@@ -11,9 +11,11 @@ const Checkout=()=>{
 
 const{cartData, dispatch}=useContext(CartContext);
 const{authData:{ user }}=useContext(AuthContext);
+const[savedAddress, setSavedAddress]=useState([{address:'D9 Alpha 1, Greater Noida Uttar Pradesh', _id:1},
+{address:'D9 Alpha 1, Greater Noida Uttar Pradesh', _id:2}])
 
 const notify = (message) => {
-  toast(message);
+  toast.error(message);
 }
 
 const checkoutHandler = async (amount) => {
@@ -67,7 +69,9 @@ const checkoutHandler = async (amount) => {
     <div className={classes.form_controller}>
     <label className={classes.input_label}>Saved Addresses</label>
     <select name="SavedAdress">
-      <option value="D9 Alpha 1, Greater Noida Uttar Pradesh">D9 Alpha 1, Great</option>
+      {savedAddress && savedAddress.map((sa)=>{
+        return <option value={savedAddress} key={sa._id}>{sa.address}</option>
+      })}
     </select>
     </div>
     <div className={classes.form_controller}>
@@ -85,6 +89,7 @@ const checkoutHandler = async (amount) => {
        <input  className={classes.input_field} type="text" name="State" placeholder="State"/>
     </div>
     </div>
+    <button className={classes.save_adrress_btn}>Save Address</button>
   </div>
  }
 
@@ -98,6 +103,7 @@ return(
  success: {duration: 3000, theme: { primary: 'green',secondary: 'black'}}}} />
     <div className={classes.page_wrapper}>
       <div className={classes.left}>
+          <div className={classes.products}>
           {
             cartData.map((product)=>{
                 return <div className={classes.product}>
@@ -109,11 +115,16 @@ return(
                </div>
             })
           }
+          </div>
+          <div className={classes.total_amount}>
+            <p>Total Amount:</p>
+            <p>7838$</p>
+          </div>
       </div>
       <div className={classes.right}>
         <div className={classes.top}>
-           { user && ( <span>Please <Link to="/login">login</Link> to checkout.</span>)  }
-           { !user && renderAddressUI() }
+           { !user && ( <span>Please <Link to="/login">login</Link> to checkout.</span>)  }
+           { user && renderAddressUI() }
         </div>
         <div className={classes.bottom}>
          <div className={classes.razorpay_btn} onClick={()=>checkoutHandler(2000)}>

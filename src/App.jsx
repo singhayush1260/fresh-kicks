@@ -17,6 +17,7 @@ import ProductDetailPage from "./pages/product-detail-page/ProductDetailPage";
 import Login from "./pages/login/Login";
 import Register from "./pages/register/Register";
 import About from "./pages/about/About";
+import PageNotFound from "./pages/page-not-found/PageNotFound";
 
 import { AuthContext } from "./context/authContext";
 import { CartContext } from "./context/cartContext";
@@ -50,6 +51,7 @@ const App = () => {
         <Route path="/products/:prod_id" element={<ProductDetailPage/>} />
         <Route path="/checkout" element={ <Checkout/>}/>
         <Route path="/paymentsuccessful" element={<PaymentSuccessful/>}/>
+        <Route path="*" element={ <PageNotFound/> }/>
       </Routes>
       <Footer />
     </div>

@@ -8,8 +8,6 @@ import { Link } from 'react-router-dom';
 const Cart=()=>{
 
 const{showCart ,handleShowCart, cartData, dispatch}=useContext(CartContext);
-console.log('cartData',cartData)
-//dispatch({type:'ADD_ITEM'})
 
 const generateCartItem=(id,brand, title, size, price, quantity)=>{
   return <div className={classes.cart_item}>
@@ -28,6 +26,9 @@ const generateCartItem=(id,brand, title, size, price, quantity)=>{
      <AiFillPlusSquare onClick={()=>{dispatch({type:'ADD_ITEM', payload:{id}})}} />
     </div>
   </div>
+  <Link className={classes.checkout} to="/checkout" onClick={handleShowCart}>
+       Proceed to checkout
+       </Link>
 </div>
 }
 
@@ -56,9 +57,7 @@ return(
            return generateCartItem(product.id,product.brand, product.title, product.size, product.price, product.quantity)
         }) : renderEmptyCartUI()
        }
-       <Link className={classes.checkout} to="/checkout" onClick={handleShowCart}>
-       Proceed to checkout
-       </Link>
+      
 
     </div>
     </>
