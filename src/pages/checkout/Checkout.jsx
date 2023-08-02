@@ -24,19 +24,30 @@ const checkoutHandler = async (name, email, contact, amount) => {
          
      console.log('checkout handler')
      try{
-        const { data:{key} } = await axios.get("http://www.localhost:3000/api/getkey",{
+      
+        const { data:{key} } = await axios.get("https://fresh-kicks-server.onrender.com/api/getkey",{
             headers:{
               'Authorization':`Bearer ${user.token}`
             }
           })
+          // const { data:{key} } = await axios.get("http://www.localhost:3000/api/getkey",{
+          //   headers:{
+          //     'Authorization':`Bearer ${user.token}`
+          //   }
+          // })
        
         console.log(key)
    
-        const { data:{order} } = await axios.post("http://localhost:3000/api/checkout", {amount},{
+        const { data:{order} } = await axios.post("https://fresh-kicks-server.onrender.com/api/checkout", {amount},{
             headers:{
                 'Authorization':`Bearer ${user.token}`
               }
         })
+      //   const { data:{order} } = await axios.post("http://localhost:3000/api/checkout", {amount},{
+      //     headers:{
+      //         'Authorization':`Bearer ${user.token}`
+      //       }
+      // })
         const options = {
             key,
             amount: order.amount,
@@ -45,7 +56,7 @@ const checkoutHandler = async (name, email, contact, amount) => {
             description: "Your shop value",
             image: "https://www.superkicks.in/cdn/shop/files/squarelogo-2_2x_435ae8f5-0c82-4cb6-926d-49d17d86ac01.png?v=1670233733&width=150",
             order_id: order.id,
-            callback_url: "http://localhost:3000/api/paymentverification",
+            callback_url: "https://fresh-kicks-server.onrender.com/api/paymentverification",
             prefill: {
                 name: name,
                 email: email,

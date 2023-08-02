@@ -22,7 +22,9 @@ const Login = () => {
       onSubmit: async (values)=>{
         const{Email, Password}=values;
         try{
-          const { data } = await axios.post('http://localhost:3000/api/auth/login',{Email,Password})
+          
+          const { data } = await axios.post('https://fresh-kicks-server.onrender.com/api/auth/login',{Email,Password})
+         // const { data } = await axios.post('http://localhost:3000/api/auth/login',{Email,Password})
           console.log(data);
           localStorage.setItem("USER", JSON.stringify(data));
           dispatch({type:'LOGIN', payload:data})
