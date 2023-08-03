@@ -40,7 +40,7 @@ Fresh Kicks is an e-commerce web application built using a combination of ReactJ
 To get started with Fresh Kicks, follow these steps:
 
 ## Installation
-Clone the repository: git clone https://github.com/your-username/fresh-kicks.git
+Clone the repository: git clone https://github.com/singhayush1260/fresh-kicks.git
 Navigate to the project directory: cd fresh-kicks
 Install dependencies: npm install
 
