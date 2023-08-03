@@ -1,5 +1,5 @@
 import "./App.scss";
-import { useContext, useEffect } from "react";
+import { useContext} from "react";
 import { Route, Routes, useLocation } from "react-router-dom";
 
 import Footer from "./components/footer/Footer";
@@ -50,7 +50,7 @@ const App = () => {
         <Route path="/products" element={<ProductPage/>} />
         <Route path="/products/:prod_id" element={<ProductDetailPage/>} />
         <Route path="/checkout" element={ <Checkout/>}/>
-        <Route path="/paymentsuccessful" element={<PaymentSuccessful/>}/>
+        <Route path="/paymentsuccessful" element={user ? <PaymentSuccessful/>: <PageNotFound/>}/>
         <Route path="*" element={ <PageNotFound/> }/>
       </Routes>
       <Footer />

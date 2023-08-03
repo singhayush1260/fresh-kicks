@@ -1,13 +1,15 @@
 import classes from './Cart.module.scss';
 import {MdCancel} from 'react-icons/md'
-import {AiFillMinusSquare, AiFillPlusSquare, AiOutlineShopping} from 'react-icons/ai';
+import {AiFillMinusSquare, AiFillPlusSquare} from 'react-icons/ai';
 import af1black1 from '../../assets/images/products/af1black1.jpg'; 
 import { useContext } from 'react';
 import { CartContext } from '../../context/cartContext';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../../context/authContext';
 const Cart=()=>{
 
 const{showCart ,handleShowCart, cartData, dispatch}=useContext(CartContext);
+const{authData:{user}}=useContext(AuthContext);
 
 const generateCartItem=(id,brand, title, size, price, quantity)=>{
   return <div className={classes.cart_item}>
@@ -36,10 +38,10 @@ const renderEmptyCartUI=()=>{
   return <div className={classes.empty_cart}>
      <p>Your cart is empty!</p>
      <Link to="/products" className={classes.btn}>Continue Shopping</Link>
-     <h5>Have an account?</h5>
+     {!user && <><h5>Have an account?</h5>
      <small>
      <Link to='/login'>Login</Link> for faster checkouts.
-     </small>
+     </small> </>}
   </div>
 }
 

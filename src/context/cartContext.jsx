@@ -3,13 +3,19 @@ import { createContext, useEffect, useReducer, useState } from "react";
 const CartContext = createContext();
 
 const cartReducer = (state, action) => {
+  if(action.payload){
   const { id } = action.payload;
+  }
   let updatedCart;
   switch (action.type) {
+    case 'CLEAR_CART':
+       console.log('clear cart')
+       return [];
     case "DECREMENT_ITEM":
       updatedCart = state.map((product) => { 
         return product.id.current === id.current ? { ...product, quantity: Math.max(product.quantity - 1, 0) } : product}
       );
+      //console.log(typeof updatedCart)
       return updatedCart.filter((product) => product.quantity >= 1);
     case "ADD_ITEM":
       const existingProductIndex = state.findIndex(
@@ -61,7 +67,6 @@ const CartContextProvider = ({ children }) => {
   };
 
   const calculateTotalPrice=()=>{
-   console.log(cartData);
    const total = cartData.reduce((acc, product)=>{
        acc = acc + ( product.price * product.quantity )
        return acc;
