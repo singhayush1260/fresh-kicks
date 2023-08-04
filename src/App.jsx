@@ -27,7 +27,7 @@ import { DashboardContext } from "./context/dashboardContext";
 
 
 const App = () => {
-  const{showCart}=useContext(CartContext);
+  const{showCart, totalPrice}=useContext(CartContext);
   const{showWishlist}=useContext(WishlistContext);
   const{showDashboard}=useContext(DashboardContext);
   const{authData:{user}}=useContext(AuthContext);
@@ -50,7 +50,7 @@ const App = () => {
         <Route path="/products" element={<ProductPage/>} />
         <Route path="/products/:prod_id" element={<ProductDetailPage/>} />
         <Route path="/checkout" element={ <Checkout/>}/>
-        <Route path="/paymentsuccessful" element={user ? <PaymentSuccessful/>: <PageNotFound/>}/>
+        <Route path="/paymentsuccessful" element={user ? <PaymentSuccessful amount={totalPrice}/>: <PageNotFound/>}/>
         <Route path="*" element={ <PageNotFound/> }/>
       </Routes>
       <Footer />

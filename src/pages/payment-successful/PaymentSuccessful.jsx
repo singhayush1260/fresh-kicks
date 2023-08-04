@@ -6,7 +6,7 @@ import {BsCheckCircle} from 'react-icons/bs';
 import {CiShoppingCart} from 'react-icons/ci';
 import { CartContext } from '../../context/cartContext';
 import { format } from 'date-fns';
-const PaymentSuccessful = () => {
+const PaymentSuccessful = ({amount}) => {
 
     const seachQuery = useSearchParams()[0]
 
@@ -28,7 +28,7 @@ const PaymentSuccessful = () => {
                 <div className={classes.payment_details_divs}>
                 <div> <Link to="/">Continue Shopping!</Link> <CiShoppingCart/> </div>
                 <div> <p>Date</p> <small> {format(new Date(),'do MMM, YYY')} </small> </div>
-                <div> <p>Amount Paid</p> <small>6785$</small> </div>
+                <div> <p>Amount Paid</p> <small>{amount}$</small> </div>
                 </div>
              </div>
             </div>
