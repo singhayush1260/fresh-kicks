@@ -16,7 +16,7 @@ const PaymentSuccessful = () => {
 
     useEffect(()=>{
         runFireworks();
-        dispatch({type:'CLEAR_CART'});
+        dispatch({type:'CLEAR_CART', payload:{id:-1}});
     },[])
     return (
         <div className={classes.page_wrapper}>

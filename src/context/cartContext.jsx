@@ -3,10 +3,8 @@ import { createContext, useEffect, useReducer, useState } from "react";
 const CartContext = createContext();
 
 const cartReducer = (state, action) => {
-  if(action.payload){
-  const { id } = action.payload;
-  }
   let updatedCart;
+  const { id } = action.payload;
   switch (action.type) {
     case 'CLEAR_CART':
        console.log('clear cart')
@@ -15,7 +13,6 @@ const cartReducer = (state, action) => {
       updatedCart = state.map((product) => { 
         return product.id.current === id.current ? { ...product, quantity: Math.max(product.quantity - 1, 0) } : product}
       );
-      //console.log(typeof updatedCart)
       return updatedCart.filter((product) => product.quantity >= 1);
     case "ADD_ITEM":
       const existingProductIndex = state.findIndex(
