@@ -1,5 +1,5 @@
 import "./App.scss";
-import { useContext} from "react";
+import { useContext, useState} from "react";
 import { Route, Routes, useLocation } from "react-router-dom";
 
 import Footer from "./components/footer/Footer";
@@ -33,7 +33,8 @@ const App = () => {
   const{authData:{user}}=useContext(AuthContext);
   const location=useLocation();
   const isCheckoutPage= location.pathname === '/checkout';
-
+ 
+  
 
   return (
     <div>

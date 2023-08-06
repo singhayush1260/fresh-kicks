@@ -4,7 +4,7 @@ import { useFormik } from "formik";
 import { loginSchema } from "./login_schema";
 import axios from "axios";
 import toast, { Toaster } from 'react-hot-toast';
-import { useContext } from "react";
+import { useContext} from "react";
 import { AuthContext } from "../../context/authContext";
 
 const Login = () => {
@@ -15,14 +15,12 @@ const Login = () => {
   const notify = (message) => {
     toast.error(message);
   }
-
   const{values, errors, touched, handleChange, handleBlur, handleSubmit}=useFormik({
       initialValues:{},
       validationSchema:loginSchema,
       onSubmit: async (values)=>{
         const{Email, Password}=values;
         try{
-          
           const { data } = await axios.post('https://fresh-kicks-server.onrender.com/api/auth/login',{Email,Password})
          // const { data } = await axios.post('http://localhost:3000/api/auth/login',{Email,Password})
           console.log(data);
