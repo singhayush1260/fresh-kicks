@@ -9,8 +9,6 @@ const ProductCarousal = ({ title }) => {
  
 const[products, setProducts]=useState(null);
 
-const[products1, setProducts1]=useState(null);
-
 useEffect(()=>{
   const fetchProducts= async ()=>{
      const products= await sanityClient.fetch('*[_type == "products"]{ title,category,brand,price,id,image}')
@@ -37,9 +35,6 @@ useEffect(()=>{
 
   return (
     <div className={classes.carousal_container}>
-      {
-        products1.map((a)=>a)
-      }
       <h3>{title}</h3>
       <div className={classes.carousal}>
         <div className={classes.prev_btn}>
