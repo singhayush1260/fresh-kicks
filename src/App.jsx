@@ -34,8 +34,6 @@ const App = () => {
   const location=useLocation();
   const isCheckoutPage= location.pathname === '/checkout';
  
-  
-
   return (
     <div>
       {showDashboard && user && <Dashboard name={user.Name} email={user.Email}/>}
